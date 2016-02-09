@@ -161,6 +161,19 @@ public class DataBaseResources {
     }
 
     @GET
+    @Path("measuretype/{name}")
+    @Produces({ MediaType.APPLICATION_JSON })
+    public MeasureDefinition getMeasureTypeByName(@PathParam("name") String name){
+        List<MeasureDefinition> mList = getDataBaseService().readMeasureTypes();
+        for (MeasureDefinition md : mList){
+            if (md.getMeasureType().equals(name)){
+                return md;
+            }
+        }
+        return null;
+    }
+
+    @GET
     @Path("people/{idPerson}/measure/{measureType}/{mid}")
     public Measure readPersonMeasure(@PathParam("idPerson") int idPerson,@PathParam("measureType") String measureType,@PathParam("mid") int mid){
         return getDataBaseService().readPersonMeasure(idPerson,measureType,mid);
@@ -169,6 +182,7 @@ public class DataBaseResources {
     @POST
     @Path("people/{idPerson}/measure")
     public Measure savePersonMeasure(@PathParam("idPerson") int idPerson, Measure m){
+        System.out.println("Sto Salvando la Misura");
         return getDataBaseService().savePersonMeasure(idPerson,m);
     }
 

@@ -1,4 +1,3 @@
-
 package introsde.client.dataBaseClient;
 
 import javax.xml.bind.annotation.XmlAccessType;
